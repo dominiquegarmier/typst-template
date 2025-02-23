@@ -164,7 +164,7 @@
 
   // start the document
   set align(left)
-  set page(margin: (left: 3.5cm, right: 3.5cm, top: 5cm, bottom: 5cm))
+  set page(margin: (left: 4cm, right: 4cm, top: 5cm, bottom: 5cm))
 
   if toc {
     pagebreak()
@@ -173,6 +173,8 @@
       indent: auto,
     )
   }
+
+  set page(margin: (left: 2cm, right: 2cm, top: 5cm, bottom: 5cm))
 
   set page(numbering: "1")
   counter(page).update(1)
