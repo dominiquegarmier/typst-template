@@ -2,7 +2,21 @@
 #import "@preview/equate:0.2.1": equate
 #import "@preview/commute:0.2.0": node, arr, commutative-diagram
 
-#let preamble(
+// colors inspired by the swiss bank notes, larger denominations used for
+// more important statments
+// https://www.snb.ch/de/the-snb/mandates-goals/cash/new-banknotes/design/design-overview
+// original colors: https://coolors.co/00ad6b-2282e2-8400b8-dc2c3d-e6a100-8f6b28
+// new colors: https://coolors.co/c9ffef-ddebfb-efceff-f8dee2-fcf0d7-f2e9da
+
+#let mypurple = rgb("#efceff")
+#let mybrown = rgb("#f2e9da")
+#let myblue = rgb("#ddebfb")
+#let mygreen = rgb("#c9ffef")
+#let myred = rgb("#f8dee2")
+#let myyellow = rgb("#fcf0d7")
+
+// base document settings
+#let base_document(
   dark-mode: false,
   doc,
 ) = {
@@ -37,41 +51,16 @@
     it
   }
 
+  // square as qed symbol
+  show: thmrules.with(qed-symbol: $square$)
 
   // spacing settings
   set list(indent: 1.5em)
   set enum(indent: 1.5em)
 
+  // settings for headings
   // specify heading font and spacing
   show heading: set block(above: 1.2em, below: 1.2em)
-
-  // square as qed symbol
-  show: thmrules.with(qed-symbol: $square$)
-
-  doc
-}
-
-
-#let lecture_notes(
-  lecture: none,
-  lecturer: none,
-  lecture_id: none,
-  authors: none,
-  semester: none,
-  date: none,
-  dark-mode: false,
-  doc,
-) = {
-  show: preamble.with(dark-mode: dark-mode)
-
-  // geometry settings
-  set page(margin: (left: 5cm, right: 5cm, top: 6cm, bottom: 7cm))
-  set par(
-    leading: 0.6em,
-    spacing: 1.2em,
-    first-line-indent: 1.5em,
-    justify: true,
-  )
 
   // make chapter titles have two lines chapter number on top
   show heading.where(level: 1): it => {
@@ -96,6 +85,35 @@
     }
   }
 
+
+  doc
+}
+
+
+// settings specific to lecture notes
+#let lecture_notes(
+  lecture: none,
+  lecturer: none,
+  lecture_id: none,
+  authors: none,
+  semester: none,
+  institution: none,
+  date: none,
+  dark-mode: false,
+  doc,
+) = {
+  show: base_document.with(dark-mode: dark-mode)
+
+  // geometry settings
+  set page(margin: (left: 5cm, right: 5cm, top: 6cm, bottom: 7cm))
+  set par(
+    leading: 0.6em,
+    spacing: 1.2em,
+    first-line-indent: 1.5em,
+    justify: true,
+  )
+
+  // title page
   set align(center)
   text(20pt, "Lecture Notes:\n" + lecture)
   v(0em)
@@ -114,7 +132,6 @@
 
   v(1em)
 
-
   let show_author(author) = {
     [
       #author.name \
@@ -129,8 +146,11 @@
     ..authors.map(author => show_author(author))
   )
 
-
+  // add institution and date
   v(1fr)
+  if institution != none {
+    text(10pt, institution + "\n")
+  }
   if date == none {
     date = datetime.today()
   }
@@ -156,3 +176,119 @@
 
   doc
 }
+
+
+// theorem environments
+#let thmbox = thmbox.with(
+  breakable: true,
+  radius: 0em, // no rounded corners
+  inset: 0em,
+  separator: [*.*], // add a period after the theorem number
+  base_level: 1,
+)
+
+#let thmproof = thmproof.with(
+  breakable: true, // allow breakable proofs
+  inset: 0em,
+  separator: [.], // add a period after the proof
+)
+
+#let thmframed = thmbox.with(
+  inset: (left: 0.6em, right: 0.6em, top: 0.8em, bottom: 1em),
+  padding: (left: -0.6em, right: -0.6em, top: 0em, bottom: 0em),
+)
+
+
+// colored environments
+#let theorem = thmframed(
+  "theorem",
+  "Theorem",
+  titlefmt: x => strong([#x]),
+  bodyfmt: x => emph(x),
+  fill: mypurple,
+)
+
+#let corollary = thmframed(
+  "theorem",
+  "Corollary",
+  titlefmt: x => strong([#x]),
+  bodyfmt: x => emph(x),
+  fill: mybrown,
+)
+
+#let proposition = thmframed(
+  "theorem",
+  "Proposition",
+  titlefmt: x => strong([#x]),
+  bodyfmt: x => emph(x),
+  fill: myblue,
+)
+
+#let lemma = thmframed(
+  "theorem",
+  "Lemma",
+  titlefmt: x => strong([#x]),
+  bodyfmt: x => emph(x),
+  fill: mygreen,
+)
+
+#let definition = thmframed(
+  "theorem",
+  "Definition",
+  titlefmt: x => strong([#x]),
+  fill: myred,
+)
+
+
+// proofs
+#let proof = thmproof(
+  "proof",
+  "Proof",
+)
+
+#let proofidea = thmproof(
+  "proof",
+  "Proof Idea",
+  bodyfmt: body => [
+    #body #h(1fr) $minus.square$
+  ],
+)
+
+
+// uncolored environments
+#let solution = thmbox(
+  "theorem",
+  "Solution",
+  separator: ".",
+  titlefmt: x => emph([#x]),
+).with(numbering: none)
+
+#let exercise = thmbox(
+  "theorem",
+  "Exercise",
+  titlefmt: x => strong([#x]),
+)
+
+#let example = thmbox(
+  "theorem",
+  "Example",
+  separator: ".",
+  namefmt: name => emph([(#name)]),
+  titlefmt: x => emph([#x]),
+)
+
+#let remark = thmbox(
+  "theorem",
+  "Remark",
+  separator: ".",
+  namefmt: name => emph([(#name)]),
+  titlefmt: x => emph([#x]),
+)
+
+#let important = thmbox(
+  "theorem",
+  "Important",
+  separator: ".",
+  namefmt: name => smallcaps([(#name)]),
+  titlefmt: x => smallcaps([#x]),
+)

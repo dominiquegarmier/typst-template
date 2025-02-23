@@ -17,6 +17,7 @@
     ),
   ),
   semester: [Spring 2025],
+  institution: [Department of Mathematics, ETH Zurich],
 )
 
 
@@ -40,4 +41,34 @@ open such that $x in U$, $y in V$ and $U sect V = emptyset$.
 
 == A random Fact About Analysis
 Let $cal(F) subset cal(P)(Omega)$ be a family of sets such that $cal(F)$ is closed under finite intersections and countable unions. Aswell as closed under taking the complement and contains the $emptyset$ and $Omega$ then we say that $cal(F)$ is a $sigma$-algebra.
+
+#theorem[Name][
+  #lorem(20)
+]
+
+#proof()[
+  #lorem(20)
+]
+
+#corollary()[
+  #lorem(20)
+]
+
+#proofidea()[
+  #lorem(20)
+]
+
+#proposition()[
+  #lorem(20)
+]
+
+
+#lemma()[
+  #lorem(20)
+]
+
+#definition()[
+  #lorem(20)
+]
+
 
