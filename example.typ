@@ -22,6 +22,8 @@
 
 = Very Cool Stuff
 
+This chapter contains a lot of cool stuff.
+
 == Alot of Formulas
 
 $ integral_E f dif mu $
@@ -36,4 +38,6 @@ $ lim_(x -> y) f(x) = f(y) $
 Let $X$ be a $T_2$ space. Then for any $x, y in X$ such that $x != y$ we can find open sets $U,V subset X$
 open such that $x in U$, $y in V$ and $U sect V = emptyset$.
 
+== A random Fact About Analysis
+Let $cal(F) subset cal(P)(Omega)$ be a family of sets such that $cal(F)$ is closed under finite intersections and countable unions. Aswell as closed under taking the complement and contains the $emptyset$ and $Omega$ then we say that $cal(F)$ is a $sigma$-algebra.
 
