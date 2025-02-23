@@ -292,3 +292,14 @@
   namefmt: name => smallcaps([(#name)]),
   titlefmt: x => smallcaps([#x]),
 )
+
+
+// custom math fonts
+#let scr(it) = text(
+  features: ("ss01",),
+  box($cal(it)$),
+)
+
+// custom operations
+#let argmin = math.op("arg min", limits: true)
+#let argmax = math.op("arg max", limits: true)
