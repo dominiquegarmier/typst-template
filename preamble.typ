@@ -98,6 +98,7 @@
   authors: none,
   semester: none,
   institution: none,
+  toc: true,
   date: none,
   dark-mode: false,
   doc,
@@ -162,15 +163,17 @@
   v(1em)
 
   // start the document
-  pagebreak()
   set align(left)
-
-  outline(
-    title: [Table of Contents],
-    indent: auto,
-  )
-
   set page(margin: (left: 3.5cm, right: 3.5cm, top: 5cm, bottom: 5cm))
+
+  if toc {
+    pagebreak()
+    outline(
+      title: [Table of Contents],
+      indent: auto,
+    )
+  }
+
   set page(numbering: "1")
   counter(page).update(1)
 
@@ -301,5 +304,9 @@
 )
 
 // custom operations
+
 #let argmin = math.op("arg min", limits: true)
 #let argmax = math.op("arg max", limits: true)
+
+#let vee = $or$
+#let wedge = $and$
