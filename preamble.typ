@@ -99,6 +99,7 @@
   authors: none,
   semester: none,
   institution: none,
+  toc: true,
   date: none,
   dark-mode: false,
   doc,
@@ -163,15 +164,19 @@
   v(1em)
 
   // start the document
-  pagebreak()
   set align(left)
+  set page(margin: (left: 4cm, right: 4cm, top: 5cm, bottom: 5cm))
 
-  outline(
-    title: [Table of Contents],
-    indent: auto,
-  )
+  if toc {
+    pagebreak()
+    outline(
+      title: [Table of Contents],
+      indent: auto,
+    )
+  }
 
-  set page(margin: (left: 3.5cm, right: 3.5cm, top: 5cm, bottom: 5cm))
+  set page(margin: (left: 2cm, right: 2cm, top: 5cm, bottom: 5cm))
+
   set page(numbering: "1")
   counter(page).update(1)
 
@@ -293,3 +298,18 @@
   namefmt: name => smallcaps([(#name)]),
   titlefmt: x => smallcaps([#x]),
 )
+
+
+// custom math fonts
+#let scr(it) = text(
+  features: ("ss01",),
+  box($cal(it)$),
+)
+
+// custom operations
+
+#let argmin = math.op("arg min", limits: true)
+#let argmax = math.op("arg max", limits: true)
+
+#let vee = $or$
+#let wedge = $and$
