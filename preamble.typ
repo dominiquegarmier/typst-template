@@ -24,6 +24,7 @@
   set page(fill: rgb("#32313d")) if dark-mode
   set text(fill: rgb("fdfdfd")) if dark-mode
   set line(stroke: white) if dark-mode
+  set text(font: "New Computer Modern", size: 10pt)
 
 
   // bibliography settings
