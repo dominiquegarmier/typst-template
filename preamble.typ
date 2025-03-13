@@ -315,4 +315,5 @@
 #let wedge = $and$
 #let acts = $#rotate(180deg)[$arrow.cw$]$
 #let isom = $tilde.equiv$
+#let rank = math.op("rank")
 
