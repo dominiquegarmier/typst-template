@@ -1,6 +1,6 @@
 #import "@preview/ctheorems:1.1.3": *
 #import "@preview/equate:0.2.1": equate
-#import "@preview/commute:0.2.0": node, arr, commutative-diagram
+#import "@preview/fletcher:0.5.6" as fletcher: diagram, node, edge
 
 // colors inspired by the swiss bank notes, larger denominations used for
 // more important statments
@@ -87,6 +87,9 @@
   }
 
   // better styling for table of contents
+  set outline.entry(
+    fill: box(width: 1fr, repeat(h(2pt) + "." + h(2pt))) + h(2pt),
+  )
   show outline.entry.where(level: 1): it => {
     if it.at("label", default: none) == <modified-entry> {
       it // prevent infinite recursion
@@ -96,9 +99,7 @@
       strong([#outline.entry(
           it.level,
           it.element,
-          it.body,
-          [], // remove fill
-          it.page, // remove page number
+          fill: none, // remove fill
         ) <modified-entry>])
     }
   }
