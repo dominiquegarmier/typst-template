@@ -291,6 +291,15 @@
   titlefmt: x => emph([#x]),
 )
 
+#let recap = thmframed(
+  "theorem",
+  "Recap",
+  fill: myyellow,
+  separator: ".",
+  namefmt: name => emph([(#name)]),
+  titlefmt: x => emph([#x]),
+)
+
 #let important = thmbox(
   "theorem",
   "Important",
