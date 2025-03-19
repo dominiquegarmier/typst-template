@@ -86,6 +86,22 @@
     }
   }
 
+  // better styling for table of contents
+  show outline.entry.where(level: 1): it => {
+    if it.at("label", default: none) == <modified-entry> {
+      it // prevent infinite recursion
+    } else {
+      v(0.5em) // add spacing before each section with level 1
+      // make level 1 sections bold
+      strong([#outline.entry(
+          it.level,
+          it.element,
+          it.body,
+          [], // remove fill
+          it.page, // remove page number
+        ) <modified-entry>])
+    }
+  }
 
   doc
 }
