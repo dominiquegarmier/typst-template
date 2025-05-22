@@ -29,8 +29,6 @@
 
   // bibliography settings
   show bibliography: x => { pagebreak() + x }
-  set cite(style: "alphanumeric")
-
 
   // numbering
   set heading(numbering: "1.1")
